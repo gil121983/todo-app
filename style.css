@@ -1,0 +1,19 @@
+body{
+    background: rgb(34, 34, 34);
+ 
+    
+}
+
+h1{
+    color: honeydew;
+}
+
+div{
+    color:gray;
+    padding:5px;
+    margin:5px;
+}
+.todo{
+    background-color: rgb(56, 46, 46);
+}
+
