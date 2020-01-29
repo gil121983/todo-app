@@ -12,8 +12,20 @@ div{
     color:gray;
     padding:5px;
     margin:5px;
+    text-align: center;
+    
 }
 .todo{
     background-color: rgb(56, 46, 46);
 }
+.view-button{
+ margin-left: 50px;
+}
 
+.edit-button{
+ margin-left: 10px;
+}
+
+.delete-button{
+ margin-left: 10px;
+}
