@@ -1,18 +1,17 @@
 var toDoList = [
-    {description:"Make todo app", status:3,priority:3},
-    {description:"Make dating app", status:2,priority:2},
-    {description:"Make first million ", status:1,priority:1}
+    {
+        priority: "high", 
+        title: "Finish 420 store",
+        description: "1.add read", 
+        status: "In Progress"},
+    {
+        priority: "moderate", 
+        title: "Finish this app",
+        description: "1.", 
+        status: "In Review"},
+    {
+        priority: "low", 
+        title: "Clean your room",
+        description: "ya mag ill ", 
+        status: "Done"}
 ];
-
-var statuses = [
-    {statId:1,statName:"In Progress"},
-    {statId:2,statName:"In Review"},
-    {statId:3,statName:"Done"}
-];
-
-var priorities = [
-    {priorityId:1,priorityName:"high"},
-    {priorityId:2,priorityName:"moderate"},
-    {priorityId:3,priorityName:"low"}
-];
-
