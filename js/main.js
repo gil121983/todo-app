@@ -25,6 +25,10 @@ function render() {
     var todoElement = document.createElement('div');
     todoElement.className = 'todo';
     todoElement.innerHTML = " status: " + todo.status + "  priority: " + todo.priority + " - " + todo.title ;
+    
+    // var todoElement = document.createElement('div');
+    // todoElement.className = 'todo';
+    // todoElement.innerHTML = " status: " + todo.status + "  priority: " + todo.priority ;
 
     var viewButton = document.createElement('button');
     viewButton.className = 'view-button';
@@ -38,7 +42,7 @@ function render() {
 
     var deleteButton = document.createElement('button');
     deleteButton.className = 'delete-button';
-    deleteButton.innerHTML = 'DELETE';
+    deleteButton.innerHTML = 'DELETE' ;
     deleteButton.onclick = onDelete.bind(event, todo);
 
     todoElement.appendChild(viewButton);
