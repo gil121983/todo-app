@@ -1,33 +1,55 @@
 
 body{
-    background: rgb(34, 34, 34);
+    background: rgb(163, 163, 163);
  
     
 }
 
 h1{
-    color: honeydew;
+    color: black;
 }
 
 div{
     color:gray;
-    padding:5px;
-    margin:5px;
+    padding:7px;
+    margin:7px;
     text-align: center;
+    
     
 }
 .todo{
     background-color: rgb(56, 46, 46);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    position: relative;
 }
+.todo:hover{
+    background: rgb(58, 48, 48);
+
+    color: white;
+  }
+button{
+    background-color: rgb(32, 32, 32);
+    border-color: rgb(77, 77, 77);
+    
+    
+}
+
 .view-button{
  margin-left: 50px;
 }
 
-.edit-button{
- margin-left: 10px;
-}
-
 .delete-button{
  margin-left: 10px;
- 
+ float:right;
+}
+.edit-button{
+ margin-left: 10px;
+ float:right;
+}
+
+
+.new-btn{
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    background-color: gray;
+
 }

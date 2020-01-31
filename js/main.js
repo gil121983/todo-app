@@ -9,10 +9,12 @@ function onView(todo, e) {
 }
 
 function onEdit(todo, e) {
+  stopDivClick(e);
   openDialog('EDIT', todo);
 }
 
 function onDelete(todo, e) {
+  stopDivClick(e);
   openDialog('DELETE', todo);
 }
 
@@ -24,28 +26,21 @@ function render() {
 
     var todoElement = document.createElement('div');
     todoElement.className = 'todo';
-    todoElement.innerHTML = " status: " + todo.status + "  priority: " + todo.priority + " - " + todo.title ;
-    
-    // var todoElement = document.createElement('div');
-    // todoElement.className = 'todo';
-    // todoElement.innerHTML = " status: " + todo.status + "  priority: " + todo.priority ;
+    todoElement.innerHTML = `${todo.status} <strong>${todo.title}</strong>  <small>priority: </small>${todo.priority}`;
 
-    var viewButton = document.createElement('button');
-    viewButton.className = 'view-button';
-    viewButton.innerHTML = 'VIEW';
-    viewButton.onclick = onView.bind(event, todo);
+    todoElement.onclick = onView.bind(event, todo);
 
     var editButton = document.createElement('button');
     editButton.className = 'edit-button';
-    editButton.innerHTML = 'EDIT';
-    editButton.onclick = onEdit.bind(event, todo);
-
+    editButton.innerHTML = '✏️';
+    editButton.onclick = onEdit.bind(event, todo)
+      
     var deleteButton = document.createElement('button');
     deleteButton.className = 'delete-button';
-    deleteButton.innerHTML = 'DELETE' ;
+    deleteButton.innerHTML = '❌';
     deleteButton.onclick = onDelete.bind(event, todo);
 
-    todoElement.appendChild(viewButton);
+
     todoElement.appendChild(editButton);
     todoElement.appendChild(deleteButton);
 

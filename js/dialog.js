@@ -24,17 +24,17 @@ function openDialog(type, todo) {
   var content = data.content(todo);
 }
 
-function viewTodo(todo){
+function viewTodo(todo) {
   Swal.fire({
-    title: todo.title,
-    text: todo.description + " - " + todo.status +" - " + todo.priority,
+    title: todo.title + "\n  status: " + todo.status + "  priority: " + todo.priority,
+    text: todo.description,
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
     confirmButtonText: 'Edit'
   }).then((result) => {
     if (result.value) {
-      Swal.fire("How do I make this work?")
+      getEditToDoForm(todo);
     }
   })
 }
@@ -47,15 +47,15 @@ function getAddToDoForm() {
       title: 'Set Priority',
       input: 'select',
       inputOptions: {
-        moderate: 'Moderate',
-        high: 'High',
-        low: 'Low'
+        "🔴": '🔴 High ',
+        "🟡": '🟡 Modrate ',
+        "🟢": '🟢 Low '
       },
       inputPlaceholder: 'Select a priority',
       showCancelButton: true,
       inputValidator: (value) => {
         return new Promise((resolve) => {
-          if (value === 'low' || value === 'high' || value === 'moderate') {
+          if (value === '🔴' || value === '🟢' || value === '🟡') {
             resolve()
             newTodoObj.priority = value;
           } else {
@@ -81,7 +81,7 @@ function getAddToDoForm() {
       if (title) {
         Swal.fire(`title is ${title}`)
         newTodoObj.title = title;
-        
+
         const { value: text } = await Swal.fire({
           input: 'textarea',
           inputPlaceholder: 'Describe your task...',
@@ -90,11 +90,11 @@ function getAddToDoForm() {
           },
           showCancelButton: true
         })
-        
+
         if (text) {
           Swal.fire(text)
           newTodoObj.description = text;
-          newTodoObj.status = "In Progress"
+          newTodoObj.status = "🚧"
           toDoList.push(newTodoObj);
           init();
 
@@ -109,7 +109,7 @@ function getAddToDoForm() {
               toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
           })
-          
+
           Toast.fire({
             icon: 'success',
             title: 'saved successfully'
@@ -129,15 +129,15 @@ function getEditToDoForm(todo) {
       input: 'select',
       inputValue: todo.priority,
       inputOptions: {
-        moderate: 'Moderate',
-        high: 'High',
-        low: 'Low'
+        "🔴": '🔴 High ',
+        "🟡": '🟡 Modrate ',
+        "🟢": '🟢 Low '
       },
       inputPlaceholder: 'Select a priority',
       showCancelButton: true,
       inputValidator: (value) => {
         return new Promise((resolve) => {
-          if (value === 'low' || value === 'high' || value === 'moderate') {
+          if (value === '🔴' || value === '🟢' || value === '🟡') {
             resolve()
             currentTodoObj.priority = value;
           } else {
@@ -164,7 +164,7 @@ function getEditToDoForm(todo) {
       if (title) {
         Swal.fire(`title is ${title}`)
         currentTodoObj.title = title;
-        
+
         const { value: text } = await Swal.fire({
           input: 'textarea',
           inputValue: todo.text,
@@ -173,21 +173,21 @@ function getEditToDoForm(todo) {
           },
           showCancelButton: true
         })
-        
+
         if (text) {
           Swal.fire(text)
           currentTodoObj.description = text;
-          
+
           const inputOptions = new Promise((resolve) => {
             setTimeout(() => {
               resolve({
-                "In Progress": "In Progress",
-                "In Review" : "In Review",
-                "Done": "Done"
+                "🚧": "🚧 In Progress",
+                "🔎": "🔎 In Review",
+                "👍": "👍 Done"
               })
             }, 1000)
           })
-          
+
           const { value: status } = await Swal.fire({
             title: 'Select Status',
             input: 'radio',
@@ -199,7 +199,7 @@ function getEditToDoForm(todo) {
               }
             }
           })
-          
+
           if (status) {
             Swal.fire({ html: `You selected: ${status}` })
             currentTodoObj.status = status;
@@ -218,8 +218,7 @@ function getEditToDoForm(todo) {
               toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
           })
-          console.log(currentTodoObj);
-          
+
           Toast.fire({
             icon: 'success',
             title: 'saved changes'
@@ -246,7 +245,7 @@ function getDeleteToDoForm(todo) {
       let position = toDoList.indexOf(todo)
       toDoList.splice(position, 1)
       render();
-    
+
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -258,7 +257,7 @@ function getDeleteToDoForm(todo) {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-      
+
       Toast.fire({
         icon: 'success',
         title: 'Task Deleted'
@@ -267,6 +266,11 @@ function getDeleteToDoForm(todo) {
   })
 
 
+}
+
+function stopDivClick(e) {
+  var event = e || arguments[0] || window.event;
+  event.stopPropagation();
 }
 
 

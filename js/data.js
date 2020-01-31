@@ -1,17 +1,17 @@
 var toDoList = [
     {
-        priority: "high", 
+        priority: "🔴", 
         title: "Finish 420 store",
         description: "1.add read", 
-        status: "In Progress"},
+        status: "🚧"},
     {
-        priority: "moderate", 
+        priority: "🟡", 
         title: "Finish this app",
         description: "1.", 
-        status: "In Review"},
+        status: "🔎"},
     {
-        priority: "low", 
+        priority: "🟢", 
         title: "Clean your room",
         description: "ya mag ill ", 
-        status: "Done"}
+        status: "👍"}
 ];
