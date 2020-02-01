@@ -15,6 +15,14 @@ var dict = {
   VIEW: {
     title: 'View ToDo',
     content: viewTodo
+  },
+  STATUS: {
+    title:"Edit Status",
+    content: editStatus
+  },
+  PRIORITY: {
+      title:"Edit Priority",
+      content: editPriority
   }
 }
 
@@ -124,30 +132,7 @@ function getAddToDoForm() {
 function getEditToDoForm(todo) {
   (async () => {
     var currentTodoObj = todo;
-    const { value: priority } = await Swal.fire({
-      title: 'Set Priority',
-      input: 'select',
-      inputValue: todo.priority,
-      inputOptions: {
-        "🔴": '🔴 High ',
-        "🟡": '🟡 Modrate ',
-        "🟢": '🟢 Low '
-      },
-      inputPlaceholder: 'Select a priority',
-      showCancelButton: true,
-      inputValidator: (value) => {
-        return new Promise((resolve) => {
-          if (value === '🔴' || value === '🟢' || value === '🟡') {
-            resolve()
-            currentTodoObj.priority = value;
-          } else {
-            resolve("you must pick priority!");
-          }
-        })
-      }
-    })
-    if (priority) {
-      Swal.fire(`You selected: ${priority}`)
+    
 
       const { value: title } = await Swal.fire({
         title: 'Enter a title',
@@ -177,34 +162,6 @@ function getEditToDoForm(todo) {
         if (text) {
           Swal.fire(text)
           currentTodoObj.description = text;
-
-          const inputOptions = new Promise((resolve) => {
-            setTimeout(() => {
-              resolve({
-                "🚧": "🚧 In Progress",
-                "🔎": "🔎 In Review",
-                "👍": "👍 Done"
-              })
-            }, 1000)
-          })
-
-          const { value: status } = await Swal.fire({
-            title: 'Select Status',
-            input: 'radio',
-            inputValue: todo.status,
-            inputOptions: inputOptions,
-            inputValidator: (value) => {
-              if (!value) {
-                return 'You need to choose something!'
-              }
-            }
-          })
-
-          if (status) {
-            Swal.fire({ html: `You selected: ${status}` })
-            currentTodoObj.status = status;
-          }
-
           init();
 
           const Toast = Swal.mixin({
@@ -224,11 +181,10 @@ function getEditToDoForm(todo) {
             title: 'saved changes'
           })
         }
-
       }
-    }
   })()
 }
+
 
 
 function getDeleteToDoForm(todo) {
@@ -273,5 +229,90 @@ function stopDivClick(e) {
   event.stopPropagation();
 }
 
+function editStatus(todo) {
+  console.log();
+  
+  var currentTodoObj = todo;
+  (async () => {
+    const inputOptions = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          "🚧": "🚧  In Progress",
+          "🔎": "🔎  In Review",
+          "👍": "👍  Done"
+        })
+      }, 1000)
+    })
+
+    const { value: status } = await Swal.fire({
+      title: 'Select Status',
+      input: 'radio',
+      inputValue: todo.status,
+      inputOptions: inputOptions,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to choose something!'
+        }
+      }
+    })
+
+    if (status) {
+      Swal.fire({ html: `You selected: ${status}` })
+      currentTodoObj.status = status;
+    }
+
+    init();
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: 'saved changes'
+    });
+  })()
+}
+
+function editPriority(todo) {
+
+  
+  (async () => {
+    var currentTodoObj = todo;
+    const { value: priority } = await Swal.fire({
+      title: 'Set Priority',
+      input: 'select',
+      inputValue: todo.priority,
+      inputOptions: {
+        "🔴": '🔴 High ',
+        "🟡": '🟡 Modrate ',
+        "🟢": '🟢 Low '
+      },
+      inputPlaceholder: 'Select a priority',
+      showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (value === '🔴' || value === '🟢' || value === '🟡') {
+            resolve()
+            currentTodoObj.priority = value;
+          } else {
+            resolve("you must pick priority!");
+          }
+        })
+      }
+    })
+    if (priority) {
+      Swal.fire(`You selected: ${priority}`)
+    }
+  })()
+}
 
 
