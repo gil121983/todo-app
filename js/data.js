@@ -1,16 +1,16 @@
 var toDoList = [
     {
-        priority: "🔴", 
+        priority: "❤️", 
         title: "Finish 420 store",
         description: "1.add read", 
         status: "🚧"},
     {
-        priority: "🟡", 
+        priority: "💛",
         title: "Finish this app",
         description: "1.", 
         status: "🔎"},
     {
-        priority: "🟢", 
+        priority: "💚", 
         title: "Clean your room",
         description: "ya mag ill ", 
         status: "👍"}
