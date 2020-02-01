@@ -167,7 +167,7 @@ function getEditToDoForm(todo) {
 
         const { value: text } = await Swal.fire({
           input: 'textarea',
-          inputValue: todo.text,
+          inputValue: todo.description,
           inputAttributes: {
             'aria-label': 'Type your message here'
           },
