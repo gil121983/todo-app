@@ -292,15 +292,15 @@ function editPriority(todo) {
       input: 'select',
       inputValue: todo.priority,
       inputOptions: {
-        "🔴": '🔴 High ',
-        "🟡": '🟡 Modrate ',
-        "🟢": '🟢 Low '
+        "❤️": '❤️ High ',
+        "💛": '💛 Modrate ',
+        "💚": '💚 Low '
       },
       inputPlaceholder: 'Select a priority',
       showCancelButton: true,
       inputValidator: (value) => {
         return new Promise((resolve) => {
-          if (value === '🔴' || value === '🟢' || value === '🟡') {
+          if (value === '❤️' || value === '💚' || value === '💛') {
             resolve()
             currentTodoObj.priority = value;
           } else {
